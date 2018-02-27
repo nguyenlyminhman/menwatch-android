@@ -5,8 +5,10 @@ package com.greenwich.utils;
  */
 
 public class MenwatchServer {
-//    192.168.0.103
+    //192.168.0.103
+    //192.168.247.2
     public static String host = "192.168.247.2";
     public static String linkBrand = "http://" + host + ":3000/api/brand";
-//    public static String linkBrand = "http://192.168.247.2:3000/api/brand";
+    public static String linkStyle = "http://" + host + ":3000/api/style";
+    //    public static String linkBrand = "http://192.168.247.2:3000/api/brand";
 }

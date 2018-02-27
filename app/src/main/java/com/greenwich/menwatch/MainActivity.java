@@ -24,7 +24,9 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.greenwich.adapter.BrandAdapter;
+import com.greenwich.adapter.StyleAdapter;
 import com.greenwich.model.Brand;
+import com.greenwich.model.Style;
 import com.greenwich.utils.Connection;
 import com.greenwich.utils.MenwatchServer;
 import com.squareup.picasso.Picasso;
@@ -41,13 +43,18 @@ public class MainActivity extends AppCompatActivity {
     ViewFlipper vfHome;
     RecyclerView rvLatestProduct;
     NavigationView nvHome;
-    ListView lvHome;
+    ListView lvBrand, lvStyle;
+
 
     ArrayList<Brand> arrBrand;
     BrandAdapter brandAdapter;
-
-    int id = 0;
+    int brandId = 0;
     String brandName = "";
+
+    ArrayList<Style> arrStyle;
+    StyleAdapter styleAdapter;
+    int styleId = 0;
+    String styleName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,28 +64,30 @@ public class MainActivity extends AppCompatActivity {
         if (Connection.checkNetworkConnection(getApplicationContext())) {
             addToolbarEvents();
             addViewFlipperEvents();
+            //add brand name to slide menu
             getBrandData();
+            //add style name to slide menu
+            getStyleData();
         } else {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
-    private void getBrandData() {
+    private void getStyleData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
-                (Request.Method.GET, MenwatchServer.linkBrand, null, new Response.Listener<JSONObject>() {
+                (Request.Method.GET, MenwatchServer.linkStyle, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray jsonArray = response.getJSONArray("data");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                                id = jsonObject.getInt("id");
-                                brandName = jsonObject.getString("brandname").trim().toString();
-                                Log.d("vietlot", id + "_" + brandName);
-                                arrBrand.add(new Brand(id, brandName));
-                                brandAdapter.notifyDataSetChanged();
+                                styleId = jsonObject.getInt("id");
+                                styleName = jsonObject.getString("stylename").toString();
+                                arrStyle.add(new Style(styleId, styleName));
+                                styleAdapter.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -94,33 +103,33 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(jsObjRequest);
     }
 
-    private void getDataBrand() {
+    private void getBrandData() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(MenwatchServer.linkBrand, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                if (response != null) {
-                    for (int i = 0; i < response.length(); i++) {
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, MenwatchServer.linkBrand, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
                         try {
-                            JSONObject jsonObject = response.getJSONObject(i);
-                            id = jsonObject.getInt("id");
-                            brandName = jsonObject.getString("brandname");
-                            arrBrand.add(new Brand(id, brandName));
-                            brandAdapter.notifyDataSetChanged();
+                            JSONArray jsonArray = response.getJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                brandId = jsonObject.getInt("id");
+                                brandName = jsonObject.getString("brandname").trim().toString();
+                                arrBrand.add(new Brand(brandId, brandName));
+                                brandAdapter.notifyDataSetChanged();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     }
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("loi o day: ", error.toString());
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(jsObjRequest);
     }
 
     private void addViewFlipperEvents() {
@@ -162,12 +171,19 @@ public class MainActivity extends AppCompatActivity {
         vfHome = findViewById(R.id.vfHome);
         rvLatestProduct = findViewById(R.id.rvLatestProduct);
         nvHome = findViewById(R.id.nvHome);
-        lvHome = findViewById(R.id.lvHome);
+        lvBrand = findViewById(R.id.lvBrand);
+        lvStyle = findViewById(R.id.lvStyle);
         //init Brand adapter
         arrBrand = new ArrayList<>();
 //        arrBrand.add(0,new Brand(0,"Ok"));
         brandAdapter = new BrandAdapter(arrBrand, getApplicationContext());
-        lvHome.setAdapter(brandAdapter);
-        //init
+        lvBrand.setAdapter(brandAdapter);
+
+        //init Brand adapter
+        arrStyle = new ArrayList<>();
+//        arrBrand.add(0,new Brand(0,"Ok"));
+        styleAdapter = new StyleAdapter(arrStyle, getApplicationContext());
+        lvStyle.setAdapter(styleAdapter);
+
     }
 }
