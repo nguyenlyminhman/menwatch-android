@@ -1,0 +1,12 @@
+package com.greenwich.utils;
+
+/**
+ * Created by nguye on 2/26/2018.
+ */
+
+public class MenwatchServer {
+//    192.168.0.103
+    public static String host = "192.168.247.2";
+    public static String linkBrand = "http://" + host + ":3000/api/brand";
+//    public static String linkBrand = "http://192.168.247.2:3000/api/brand";
+}
