@@ -39,11 +39,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Latest product"
-                    android:textColor="#73B6E1"
+                    android:layout_margin="0dp"
+                    android:text=" Latest product"
+                    android:textColor="#f0f0f0"
+                    android:background="#73B6E1"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -51,9 +52,7 @@
                     android:id="@+id/rvLatestProduct"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-
                 </android.support.v7.widget.RecyclerView>
-
             </LinearLayout>
 
         </LinearLayout>
