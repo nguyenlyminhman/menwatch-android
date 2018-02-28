@@ -10,5 +10,5 @@ public class MenwatchServer {
     public static String host = "192.168.247.2";
     public static String linkBrand = "http://" + host + ":3000/api/brand";
     public static String linkStyle = "http://" + host + ":3000/api/style";
-    //    public static String linkBrand = "http://192.168.247.2:3000/api/brand";
+    public static String linkLatestProduct = "http://" + host + ":3000/api/product/all";
 }

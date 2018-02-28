@@ -2,6 +2,7 @@ package com.greenwich.model;
 
 /**
  * Created by nguye on 2/27/2018.
+ *
  */
 
 public class Style {

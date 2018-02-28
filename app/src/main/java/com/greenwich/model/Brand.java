@@ -2,6 +2,7 @@ package com.greenwich.model;
 
 /**
  * Created by nguye on 2/25/2018.
+ *
  */
 
 public class Brand {

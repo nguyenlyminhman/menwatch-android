@@ -1,10 +1,12 @@
 package com.greenwich.menwatch;
 
+import android.icu.text.LocaleDisplayNames;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -24,8 +26,10 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.greenwich.adapter.BrandAdapter;
+import com.greenwich.adapter.LatestProductAdapter;
 import com.greenwich.adapter.StyleAdapter;
 import com.greenwich.model.Brand;
+import com.greenwich.model.Product;
 import com.greenwich.model.Style;
 import com.greenwich.utils.Connection;
 import com.greenwich.utils.MenwatchServer;
@@ -56,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
     int styleId = 0;
     String styleName = "";
 
+    ArrayList<Product> arrProduct;
+    LatestProductAdapter latestProductAdapter;
+    int productId = 0;
+    String productName = "";
+    Double productPrice = 0.0;
+    String productImage = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,10 +79,44 @@ public class MainActivity extends AppCompatActivity {
             getBrandData();
             //add style name to slide menu
             getStyleData();
+            //add style name to slide menu
+            getLatestProductData();
         } else {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
+    }
+
+    private void getLatestProductData() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, MenwatchServer.linkLatestProduct, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            Log.d("latestProduct", response.toString());
+
+                            JSONArray jsonArray = response.getJSONArray("data");
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                productId = jsonObject.getInt("id");
+                                productName = jsonObject.getString("name");
+                                productPrice = Double.parseDouble(jsonObject.getString("price"));
+                                arrProduct.add(new Product(productId, productName, productPrice, "description", "image", "details"));
+                                latestProductAdapter.notifyDataSetChanged();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // TODO Auto-generated method stub
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+        requestQueue.add(jsObjRequest);
     }
 
     private void getStyleData() {
@@ -85,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 styleId = jsonObject.getInt("id");
-                                styleName = jsonObject.getString("stylename").toString();
+                                styleName = jsonObject.getString("stylename");
                                 arrStyle.add(new Style(styleId, styleName));
                                 styleAdapter.notifyDataSetChanged();
                             }
@@ -114,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 brandId = jsonObject.getInt("id");
-                                brandName = jsonObject.getString("brandname").trim().toString();
+                                brandName = jsonObject.getString("brandname");
                                 arrBrand.add(new Brand(brandId, brandName));
                                 brandAdapter.notifyDataSetChanged();
                             }
@@ -181,9 +226,15 @@ public class MainActivity extends AppCompatActivity {
 
         //init Brand adapter
         arrStyle = new ArrayList<>();
-//        arrBrand.add(0,new Brand(0,"Ok"));
         styleAdapter = new StyleAdapter(arrStyle, getApplicationContext());
         lvStyle.setAdapter(styleAdapter);
+
+        //init Latest Product Adapter
+        arrProduct = new ArrayList<>();
+        latestProductAdapter = new LatestProductAdapter(getApplicationContext(), arrProduct);
+        rvLatestProduct.setHasFixedSize(true);
+        rvLatestProduct.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        rvLatestProduct.setAdapter(latestProductAdapter);
 
     }
 }

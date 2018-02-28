@@ -78,11 +78,12 @@
                     android:textSize="20sp"
                     android:textStyle="bold" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Brand"
-                    android:textColor="#73B6E1"
+                    android:layout_margin="0dp"
+                    android:text=" Brand"
+                    android:background="#73B6E1"
+                    android:textColor="#f0f0f0"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -90,21 +91,20 @@
                     android:id="@+id/lvBrand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                 </ListView>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="Style"
-                    android:textColor="#73B6E1"
+                    android:layout_margin="0dp"
+                    android:text=" Style"
+                    android:background="#73B6E1"
+                    android:textColor="#f0f0f0"
                     android:textSize="20sp"
                     android:textStyle="bold" />
                 <ListView
                     android:id="@+id/lvStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                 </ListView>
             </LinearLayout>
         </android.support.design.widget.NavigationView>
