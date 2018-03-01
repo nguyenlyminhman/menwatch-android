@@ -246,7 +246,12 @@ public class MainActivity extends AppCompatActivity {
                                 productId = jsonObject.getInt("id");
                                 productName = jsonObject.getString("name");
                                 productPrice = Double.parseDouble(jsonObject.getString("price"));
-                                arrProduct.add(new Product(productId, productName, productPrice, "description", "image", "details"));
+//                                productImage = jsonObject.getString("image");
+                                JSONObject jsonObjectImage = jsonObject.getJSONObject("image");
+                                productImage  = MenwatchServer.linkImage + jsonObjectImage.getString("img1");
+
+//                                Log.i("productImage: ", productImage);
+                                arrProduct.add(new Product(productId, productName, productPrice, "description", productImage, "details"));
                                 latestProductAdapter.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
