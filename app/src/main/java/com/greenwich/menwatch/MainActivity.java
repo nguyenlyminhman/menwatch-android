@@ -1,5 +1,6 @@
 package com.greenwich.menwatch;
 
+import android.content.Intent;
 import android.icu.text.LocaleDisplayNames;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -81,10 +83,152 @@ public class MainActivity extends AppCompatActivity {
             getStyleData();
             //add style name to slide menu
             getLatestProductData();
+            //set event on Brand and Style
+            setBrandItemEvent();
+            //set event on Brand and Style
+            setStyleItemEvent();
+
         } else {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
+    }
+
+    private void setStyleItemEvent() {
+        lvStyle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, StyleActivity.class);
+                            intent.putExtra("idStyle", arrStyle.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+//                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+//                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                            startActivity(intent);
+//                        } else {
+//                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+//                        }
+//                        dlHome.closeDrawer(GravityCompat.START);
+//                        break;
+                    case 1:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, StyleActivity.class);
+                            intent.putExtra("idStyle", arrStyle.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                    case 2:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, StyleActivity.class);
+                            intent.putExtra("idStyle", arrStyle.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                    case 3:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, StyleActivity.class);
+                            intent.putExtra("idStyle", arrStyle.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                    case 4:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, StyleActivity.class);
+                            intent.putExtra("idStyle", arrStyle.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                }
+            }
+        });
+    }
+
+    private void setBrandItemEvent() {
+        lvBrand.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, BrandActivity.class);
+                            intent.putExtra("idBrand", arrBrand.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+//                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+//                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                            startActivity(intent);
+//                        } else {
+//                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+//                        }
+//                        dlHome.closeDrawer(GravityCompat.START);
+//                        break;
+                    case 1:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, BrandActivity.class);
+                            intent.putExtra("idBrand", arrBrand.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                    case 2:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, BrandActivity.class);
+                            intent.putExtra("idBrand", arrBrand.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                    case 3:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, BrandActivity.class);
+                            intent.putExtra("idBrand", arrBrand.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                    case 4:
+                        if (Connection.checkNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, BrandActivity.class);
+                            intent.putExtra("idBrand", arrBrand.get(i).getId());
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
+                        }
+                        dlHome.closeDrawer(GravityCompat.START);
+                        break;
+                }
+
+            }
+        });
     }
 
     private void getLatestProductData() {
@@ -233,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
         arrProduct = new ArrayList<>();
         latestProductAdapter = new LatestProductAdapter(getApplicationContext(), arrProduct);
         rvLatestProduct.setHasFixedSize(true);
-        rvLatestProduct.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        rvLatestProduct.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rvLatestProduct.setAdapter(latestProductAdapter);
 
     }
