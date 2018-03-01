@@ -9,16 +9,26 @@ public class Product {
     private String name;
     private Double price;
     private String description;
-    private String image;
-    private String details;
+    private String img1;
+    private String img2;
+    private String img3;
+    private String mt;
+    private String cs;
+    private String sm;
+    private String wr;
 
-    public Product(int id, String name, Double price, String description, String image, String details) {
+    public Product(int id, String name, Double price, String description, String img1, String img2, String img3, String mt, String cs, String sm, String wr) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
-        this.image = image;
-        this.details = details;
+        this.img1 = img1;
+        this.img2 = img2;
+        this.img3 = img3;
+        this.mt = mt;
+        this.cs = cs;
+        this.sm = sm;
+        this.wr = wr;
     }
 
     public int getId() {
@@ -53,19 +63,59 @@ public class Product {
         this.description = description;
     }
 
-    public String getImage() {
-        return image;
+    public String getImg1() {
+        return img1;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImg1(String img1) {
+        this.img1 = img1;
     }
 
-    public String getDetails() {
-        return details;
+    public String getImg2() {
+        return img2;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setImg2(String img2) {
+        this.img2 = img2;
+    }
+
+    public String getImg3() {
+        return img3;
+    }
+
+    public void setImg3(String img3) {
+        this.img3 = img3;
+    }
+
+    public String getMt() {
+        return mt;
+    }
+
+    public void setMt(String mt) {
+        this.mt = mt;
+    }
+
+    public String getCs() {
+        return cs;
+    }
+
+    public void setCs(String cs) {
+        this.cs = cs;
+    }
+
+    public String getSm() {
+        return sm;
+    }
+
+    public void setSm(String sm) {
+        this.sm = sm;
+    }
+
+    public String getWr() {
+        return wr;
+    }
+
+    public void setWr(String wr) {
+        this.wr = wr;
     }
 }

@@ -40,7 +40,7 @@ public class LatestProductAdapter extends RecyclerView.Adapter<LatestProductAdap
         Product product = arrProduct.get(position);
         holder.txtProductName.setText(product.getName());
         holder.txtProductPrice.setText("$" + product.getPrice());
-        Picasso.with(context).load(product.getImage())
+        Picasso.with(context).load(product.getImg1())
                 .placeholder(R.drawable.fs5350)
                 .error(R.drawable.fs5350)
                 .into(holder.imageViewProduct);

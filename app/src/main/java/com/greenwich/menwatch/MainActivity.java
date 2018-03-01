@@ -67,7 +67,14 @@ public class MainActivity extends AppCompatActivity {
     int productId = 0;
     String productName = "";
     Double productPrice = 0.0;
-    String productImage = "";
+    String productDescription="";
+    String productImage1 = "";
+    String productImage2 = "";
+    String productImage3 = "";
+    String productMT ="";
+    String productCS ="";
+    String productSM ="";
+    String productWR ="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -246,12 +253,23 @@ public class MainActivity extends AppCompatActivity {
                                 productId = jsonObject.getInt("id");
                                 productName = jsonObject.getString("name");
                                 productPrice = Double.parseDouble(jsonObject.getString("price"));
-//                                productImage = jsonObject.getString("image");
+                                productDescription = jsonObject.getString("description");
+                                //get image jsonb
                                 JSONObject jsonObjectImage = jsonObject.getJSONObject("image");
-                                productImage  = MenwatchServer.linkImage + jsonObjectImage.getString("img1");
+                                productImage1  = MenwatchServer.linkImage + jsonObjectImage.getString("img1");
+                                productImage2  = MenwatchServer.linkImage + jsonObjectImage.getString("img2");
+                                productImage3  = MenwatchServer.linkImage + jsonObjectImage.getString("img3");
+//get image jsonb
+                                JSONObject jsonObjectDetails = jsonObject.getJSONObject("details");
+                                productCS  = jsonObjectDetails.getString("cs");
+                                productMT  = jsonObjectDetails.getString("mt");
+                                productSM= jsonObjectDetails.getString("sm");
+                                productWR  = jsonObjectDetails.getString("wr");
 
 //                                Log.i("productImage: ", productImage);
-                                arrProduct.add(new Product(productId, productName, productPrice, "description", productImage, "details"));
+                                arrProduct.add(new Product(productId, productName, productPrice, productDescription,
+                                        productImage1, productImage2, productImage3,
+                                        productMT, productCS, productSM, productWR ));
                                 latestProductAdapter.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
