@@ -245,8 +245,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Log.d("latestProduct", response.toString());
-
                             JSONArray jsonArray = response.getJSONArray("data");
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -266,7 +264,6 @@ public class MainActivity extends AppCompatActivity {
                                 productSM= jsonObjectDetails.getString("sm");
                                 productWR  = jsonObjectDetails.getString("wr");
 
-//                                Log.i("productImage: ", productImage);
                                 arrProduct.add(new Product(productId, productName, productPrice, productDescription,
                                         productImage1, productImage2, productImage3,
                                         productMT, productCS, productSM, productWR ));

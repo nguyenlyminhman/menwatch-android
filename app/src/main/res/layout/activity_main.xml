@@ -23,7 +23,6 @@
                 android:background="#000"
                 app:title="Menwatch"
                 app:titleTextColor="#f0f0f0">
-
             </android.support.v7.widget.Toolbar>
 
             <ViewFlipper
