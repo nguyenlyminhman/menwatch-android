@@ -6,6 +6,8 @@ package com.greenwich.model;
 
 public class Product {
     private int id;
+    private int idStyle;
+    private int idBrand;
     private String name;
     private Double price;
     private String description;
@@ -17,8 +19,10 @@ public class Product {
     private String sm;
     private String wr;
 
-    public Product(int id, String name, Double price, String description, String img1, String img2, String img3, String mt, String cs, String sm, String wr) {
+    public Product(int id, int idStyle, int idBrand, String name, Double price, String description, String img1, String img2, String img3, String mt, String cs, String sm, String wr) {
         this.id = id;
+        this.idStyle = idStyle;
+        this.idBrand = idBrand;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -37,6 +41,22 @@ public class Product {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getIdStyle() {
+        return idStyle;
+    }
+
+    public void setIdStyle(int idStyle) {
+        this.idStyle = idStyle;
+    }
+
+    public int getIdBrand() {
+        return idBrand;
+    }
+
+    public void setIdBrand(int idBrand) {
+        this.idBrand = idBrand;
     }
 
     public String getName() {

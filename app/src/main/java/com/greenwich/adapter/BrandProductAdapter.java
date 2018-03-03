@@ -59,6 +59,7 @@ public class BrandProductAdapter extends BaseAdapter {
             viewHolder.txtBS_ProductName = view.findViewById(R.id.txtBS_ProductName);
             viewHolder.txtBS_ProductPrice = view.findViewById(R.id.txtBS_ProductPrice);
             viewHolder.txtBS_ProductDetails = view.findViewById(R.id.txtBS_ProductDetails);
+            viewHolder.ivBrandStyleProduct = view.findViewById(R.id.ivBrandStyleProduct);
             view.setTag(viewHolder);
         }else{
             viewHolder = (ViewHolder) view.getTag();

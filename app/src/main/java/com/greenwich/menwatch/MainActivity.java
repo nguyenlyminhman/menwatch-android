@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Product> arrProduct;
     LatestProductAdapter latestProductAdapter;
     int productId = 0;
+    int productIdStyle = 0;
+    int productIdBrand = 0;
     String productName = "";
     Double productPrice = 0.0;
     String productDescription="";
@@ -249,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                                 productId = jsonObject.getInt("id");
+                                productIdStyle = jsonObject.getInt("idStyle");
+                                productIdBrand = jsonObject.getInt("idBrand");
                                 productName = jsonObject.getString("name");
                                 productPrice = Double.parseDouble(jsonObject.getString("price"));
                                 productDescription = jsonObject.getString("description");
@@ -264,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                                 productSM= jsonObjectDetails.getString("sm");
                                 productWR  = jsonObjectDetails.getString("wr");
 
-                                arrProduct.add(new Product(productId, productName, productPrice, productDescription,
+                                arrProduct.add(new Product(productId, productIdStyle, productIdBrand, productName, productPrice, productDescription,
                                         productImage1, productImage2, productImage3,
                                         productMT, productCS, productSM, productWR ));
                                 latestProductAdapter.notifyDataSetChanged();

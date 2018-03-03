@@ -12,7 +12,7 @@
         android:id="@+id/tbBrand"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#000"
+        android:background="#73B6E1"
         app:title="Brand"
         app:titleTextColor="#f0f0f0">
     </android.support.v7.widget.Toolbar>
