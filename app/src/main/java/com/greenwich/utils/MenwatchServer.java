@@ -14,5 +14,6 @@ public class MenwatchServer {
     public static String linkStyle = "http://" + host + "/api/style";
     public static String linkLatestProduct = "http://" + host + "/api/product/all";
     public static String linkProductByBrand = "http://" + host + "/api/product/brand/";
+    public static String linkProductByStyle = "http://" + host + "/api/product/style/";
 
 }

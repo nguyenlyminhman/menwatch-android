@@ -34,7 +34,6 @@ public class BrandActivity extends AppCompatActivity {
     BrandProductAdapter brandProductAdapter;
     ArrayList<Product> arrProduct;
     int idBrand = 0;
-    int page = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +42,6 @@ public class BrandActivity extends AppCompatActivity {
 
         addControls();
         if (Connection.checkNetworkConnection(getApplicationContext())) {
-
             addToolbarBrandEvents();
             getBrandProductData(getIntent().getIntExtra("idBrand", -1));
         } else {
@@ -52,9 +50,9 @@ public class BrandActivity extends AppCompatActivity {
         }
     }
 
-    private void getBrandProductData(int _page) {
+    private void getBrandProductData(int brandId) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        String getDataLink = MenwatchServer.linkProductByBrand + String.valueOf(_page);
+        String getDataLink = MenwatchServer.linkProductByBrand + String.valueOf(brandId);
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, getDataLink, null, new Response.Listener<JSONObject>() {
                     @Override
@@ -83,12 +81,12 @@ public class BrandActivity extends AppCompatActivity {
                                 productName = jsonObject.getString("name");
                                 productPrice = Double.parseDouble(jsonObject.getString("price"));
                                 productDescription = jsonObject.getString("description");
-//get image jsonb
+                                //get image jsonb
                                 JSONObject jsonObjectImage = jsonObject.getJSONObject("image");
                                 productImage1 = MenwatchServer.linkImage + jsonObjectImage.getString("img1");
                                 productImage2 = MenwatchServer.linkImage + jsonObjectImage.getString("img2");
                                 productImage3 = MenwatchServer.linkImage + jsonObjectImage.getString("img3");
-//get details jsonb
+                                //get details jsonb
                                 JSONObject jsonObjectDetails = jsonObject.getJSONObject("details");
                                 productCS = jsonObjectDetails.getString("cs");
                                 productMT = jsonObjectDetails.getString("mt");
