@@ -76,6 +76,7 @@ public class StyleActivity extends AppCompatActivity {
                         int productIdBrand = 0;
                         String productName = "";
                         Double productPrice = 0.0;
+                        int productQuantity = 0;
                         String productDescription = "";
                         String productImage1 = "";
                         String productImage2 = "";
@@ -94,6 +95,7 @@ public class StyleActivity extends AppCompatActivity {
                                 productIdBrand = jsonObject.getInt("idBrand");
                                 productName = jsonObject.getString("name");
                                 productPrice = Double.parseDouble(jsonObject.getString("price"));
+                                productQuantity = jsonObject.getInt("quantity");
                                 productDescription = jsonObject.getString("description");
 //get image jsonb
                                 JSONObject jsonObjectImage = jsonObject.getJSONObject("image");
@@ -108,7 +110,7 @@ public class StyleActivity extends AppCompatActivity {
                                 productWR = jsonObjectDetails.getString("wr");
 
                                 arrProduct.add(new Product(productId, productIdStyle, productIdBrand,
-                                        productName, productPrice, productDescription,
+                                        productName, productPrice, productQuantity, productDescription,
                                         productImage1, productImage2, productImage3,
                                         productMT, productCS, productSM, productWR));
                                 styleProductAdapter.notifyDataSetChanged();

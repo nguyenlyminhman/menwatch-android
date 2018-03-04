@@ -50,6 +50,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         int productIdBrand = product.getIdBrand();
         String productName = product.getName();
         Double productPrice = product.getPrice();
+        int productQuantity = product.getQuantity();
         String productDescription = product.getDescription();
         String productImage1 = product.getImg1();
         String productImage2 = product.getImg2();

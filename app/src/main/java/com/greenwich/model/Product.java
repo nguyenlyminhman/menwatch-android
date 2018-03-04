@@ -12,6 +12,7 @@ public class Product implements Serializable {
     private int idBrand;
     private String name;
     private Double price;
+    private int quantity;
     private String description;
     private String img1;
     private String img2;
@@ -21,12 +22,13 @@ public class Product implements Serializable {
     private String sm;
     private String wr;
 
-    public Product(int id, int idStyle, int idBrand, String name, Double price, String description, String img1, String img2, String img3, String mt, String cs, String sm, String wr) {
+    public Product(int id, int idStyle, int idBrand, String name, Double price, int quantity, String description, String img1, String img2, String img3, String mt, String cs, String sm, String wr) {
         this.id = id;
         this.idStyle = idStyle;
         this.idBrand = idBrand;
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
         this.description = description;
         this.img1 = img1;
         this.img2 = img2;
@@ -35,6 +37,14 @@ public class Product implements Serializable {
         this.cs = cs;
         this.sm = sm;
         this.wr = wr;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public int getId() {
