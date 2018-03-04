@@ -1,10 +1,12 @@
 package com.greenwich.model;
 
+import java.io.Serializable;
+
 /**
  * Created by nguye on 2/27/2018.
  */
 
-public class Product {
+public class Product implements Serializable {
     private int id;
     private int idStyle;
     private int idBrand;

@@ -1,10 +1,12 @@
 package com.greenwich.menwatch;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -44,12 +46,23 @@ public class BrandActivity extends AppCompatActivity {
         if (Connection.checkNetworkConnection(getApplicationContext())) {
             addToolbarBrandEvents();
             getBrandProductData(getIntent().getIntExtra("idBrand", -1));
+            addListViewBrandProductEvents();
         } else {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
     }
-
+    private void addListViewBrandProductEvents() {
+        lvBrandProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), ProductDetailsActivity.class);
+                intent.putExtra("product_details", arrProduct.get(i));
+                Log.d("product_details", arrProduct.get(i)+"");
+                startActivity(intent);
+            }
+        });
+    }
     private void getBrandProductData(int brandId) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         String getDataLink = MenwatchServer.linkProductByBrand + String.valueOf(brandId);

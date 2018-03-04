@@ -1,13 +1,17 @@
 package com.greenwich.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.greenwich.menwatch.MainActivity;
+import com.greenwich.menwatch.ProductDetailsActivity;
 import com.greenwich.menwatch.R;
 import com.greenwich.model.Product;
 import com.squareup.picasso.Picasso;
@@ -51,6 +55,11 @@ public class LatestProductAdapter extends RecyclerView.Adapter<LatestProductAdap
         return arrProduct.size();
     }
 
+
+    public void getItemPosition(int position) {
+        arrProduct.get(position);
+    }
+
     public class ProductItemsHolder extends RecyclerView.ViewHolder {
 
         public ImageView imageViewProduct;
@@ -61,6 +70,18 @@ public class LatestProductAdapter extends RecyclerView.Adapter<LatestProductAdap
             imageViewProduct = itemView.findViewById(R.id.imageViewProduct);
             txtProductName = itemView.findViewById(R.id.txtProductName);
             txtProductPrice = itemView.findViewById(R.id.txtProductPrice);
+
+            //get item in RecyclerView
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context.getApplicationContext(), ProductDetailsActivity.class);
+                    intent.putExtra("product_details", arrProduct.get(getAdapterPosition()));
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 

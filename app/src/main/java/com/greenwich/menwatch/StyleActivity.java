@@ -1,9 +1,12 @@
 package com.greenwich.menwatch;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,10 +46,22 @@ public class StyleActivity extends AppCompatActivity {
 
             addToolbarBrandEvents();
             getStyleProductData(getIntent().getIntExtra("idStyle", -1));
+            addListViewStyleProductEvents();
         } else {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
+    }
+
+    private void addListViewStyleProductEvents() {
+        lvStyleProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getApplicationContext(), ProductDetailsActivity.class);
+                intent.putExtra("product_details", arrProduct.get(i));
+                startActivity(intent);
+            }
+        });
     }
 
     private void getStyleProductData(int styleId) {

@@ -86,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         if (Connection.checkNetworkConnection(getApplicationContext())) {
             addToolbarEvents();
             addViewFlipperEvents();
+
             //add brand name to slide menu
             getBrandData();
             //add style name to slide menu
@@ -96,12 +97,22 @@ public class MainActivity extends AppCompatActivity {
             setBrandItemEvent();
             //set event on Brand and Style
             setStyleItemEvent();
-
+//            addRecyclerViewLatestProductEvents();
         } else {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
     }
+
+//    private void addRecyclerViewLatestProductEvents() {
+//        rvLatestProduct.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+//    }
+
 
     private void setStyleItemEvent() {
         lvStyle.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -356,7 +367,7 @@ public class MainActivity extends AppCompatActivity {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             vfHome.addView(imageView);
         }
-        vfHome.setFlipInterval(5000);
+        vfHome.setFlipInterval(3000);
         vfHome.setAutoStart(true);
 
         Animation slide_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in);

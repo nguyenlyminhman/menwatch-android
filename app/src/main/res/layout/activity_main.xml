@@ -10,7 +10,9 @@
         android:id="@+id/dlHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,7 +31,6 @@
                 android:id="@+id/vfHome"
                 android:layout_width="match_parent"
                 android:layout_height="200dp">
-
             </ViewFlipper>
 
             <LinearLayout
@@ -56,7 +57,7 @@
             </LinearLayout>
 
         </LinearLayout>
-
+</ScrollView>
         <android.support.design.widget.NavigationView
             android:id="@+id/nvHome"
             android:layout_width="match_parent"
@@ -108,4 +109,5 @@
             </LinearLayout>
         </android.support.design.widget.NavigationView>
     </android.support.v4.widget.DrawerLayout>
+
 </LinearLayout>
