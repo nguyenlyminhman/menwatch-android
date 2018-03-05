@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -48,14 +49,14 @@ public class CartAdapter extends BaseAdapter {
     public class ViewHolder {
         TextView txtCartItemName, txtCartItemPrice;
         EditText txtCartItemQuantity;
-        Button btnCartItemUpdate;
+        ImageButton btnCartItemUpdate, btnCartItemRemove;
         ImageView ivCartItemImage;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
-        if (view != null) {
+        if (view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.listview_cart, null);
@@ -63,6 +64,7 @@ public class CartAdapter extends BaseAdapter {
             viewHolder.txtCartItemPrice = view.findViewById(R.id.txtCartItemPrice);
             viewHolder.txtCartItemQuantity = view.findViewById(R.id.txtCartItemQuantity);
             viewHolder.btnCartItemUpdate = view.findViewById(R.id.btnCartItemUpdate);
+            viewHolder.btnCartItemRemove = view.findViewById(R.id.btnCartItemRemove);
             viewHolder.ivCartItemImage = view.findViewById(R.id.ivCartItemImage);
             view.setTag(viewHolder);
         }else{
@@ -70,13 +72,12 @@ public class CartAdapter extends BaseAdapter {
         }
         Cart objCart = (Cart) getItem(i);
         viewHolder.txtCartItemName.setText(objCart.getProductName());
-        viewHolder.txtCartItemPrice.setText("$"+objCart.getProductPrice());
-        viewHolder.txtCartItemQuantity.setText(objCart.getProductQuantity());
+        viewHolder.txtCartItemPrice.setText(" $"+objCart.getProductPrice());
+        viewHolder.txtCartItemQuantity.setText(objCart.getProductQuantity()+"");
         Picasso.with(context).load(objCart.getProductImage())
                 .placeholder(R.drawable.no_image)
                 .error(R.drawable.error_image)
                 .into(viewHolder.ivCartItemImage);
-
         return view;
     }
 }

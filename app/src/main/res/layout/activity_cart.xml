@@ -8,15 +8,16 @@
     android:weightSum="10"
     tools:context="com.greenwich.menwatch.CartActivity">
     <android.support.v7.widget.Toolbar
-        android:id="@+id/tbBrand"
+        android:id="@+id/tbCartItems"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#73B6E1"
-        app:title="Your Shopping Cart"
+        app:title="Your Shopping Bag"
         app:titleTextColor="#f0f0f0">
     </android.support.v7.widget.Toolbar>
     <LinearLayout
         android:layout_weight="7"
+        android:background="#f0f0f0"
         android:layout_width="match_parent"
         android:layout_height="0dp">
             <FrameLayout
@@ -36,8 +37,8 @@
                 </ListView>
             </FrameLayout>
     </LinearLayout>
-
         <TextView
+            android:id="@+id/txtCartItemsTotalsPrice"
             android:layout_weight="1"
             android:textSize="30dp"
             android:text="Total: $ 999999999"
