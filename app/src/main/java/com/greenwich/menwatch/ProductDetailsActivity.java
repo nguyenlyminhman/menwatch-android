@@ -1,5 +1,6 @@
 package com.greenwich.menwatch;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,9 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.greenwich.model.Cart;
 import com.greenwich.model.Product;
 import com.greenwich.utils.Connection;
-import com.greenwich.utils.MenwatchServer;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -27,6 +28,21 @@ public class ProductDetailsActivity extends AppCompatActivity {
     TextView txtPDName, txtPDPrice, txtPDQuantity, txtPDDetails, txtPDDescription;
     Button btnAddToCart;
 
+    int productId = 0;
+    int productIdStyle = 0;
+    int productIdBrand = 0;
+    String productName = "";
+    Double productPrice = 0.0;
+    int productQuantity = 0;
+    String productDescription = "";
+    String productImage1 = "";
+    String productImage2 = "";
+    String productImage3 = "";
+    String productMT = "";
+    String productCS = "";
+    String productSM = "";
+    String productWR = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,29 +52,63 @@ public class ProductDetailsActivity extends AppCompatActivity {
         if (Connection.checkNetworkConnection(getApplicationContext())) {
             addToolbarProductDetailsEvents();
             getProductDetailsData();
+            addToCartEvents();
         } else {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
     }
 
+    private void addToCartEvents() {
+        btnAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.arrCart.size() > 0) {
+                    int qty = Integer.parseInt(txtPDQuantity.getText().toString());
+                    boolean exist = false;
+                    for (int i = 0; i < MainActivity.arrCart.size(); i++) {
+                        if (MainActivity.arrCart.get(i).getProductId() == productId) {
+                            MainActivity.arrCart.get(i).setProductQuantity(MainActivity.arrCart.get(i).getProductQuantity() + qty);
+                            if (MainActivity.arrCart.get(i).getProductQuantity() > productQuantity) {
+                                Toast.makeText(ProductDetailsActivity.this, "This product only have " + productQuantity + " items in stock.", Toast.LENGTH_SHORT).show();
+                            }
+                            MainActivity.arrCart.get(i).setProductPrice(productPrice * MainActivity.arrCart.get(i).getProductQuantity());
+                            exist = true;
+                        }
+                    }
+                    if (exist == false) {
+                        int quantity = Integer.parseInt(txtPDQuantity.getText().toString());
+                        Double itemPrice = quantity * productPrice;
+                        MainActivity.arrCart.add(new Cart(productId, productName, itemPrice, productImage1, quantity));
+                    }
+                } else {
+                    int quantity = Integer.parseInt(txtPDQuantity.getText().toString());
+                    Double itemPrice = quantity * productPrice;
+                    MainActivity.arrCart.add(new Cart(productId, productName, itemPrice, productImage1, quantity));
+                }
+                Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void getProductDetailsData() {
 
         Product product = (Product) getIntent().getSerializableExtra("product_details");
-        int productId = product.getId();
-        int productIdStyle = product.getIdStyle();
-        int productIdBrand = product.getIdBrand();
-        String productName = product.getName();
-        Double productPrice = product.getPrice();
-        int productQuantity = product.getQuantity();
-        String productDescription = product.getDescription();
-        String productImage1 = product.getImg1();
-        String productImage2 = product.getImg2();
-        String productImage3 = product.getImg3();
-        String productMT = product.getMt();
-        String productCS = product.getCs();
-        String productSM = product.getSm();
-        String productWR = product.getWr();
+        productId = product.getId();
+        productIdStyle = product.getIdStyle();
+        productIdBrand = product.getIdBrand();
+        productName = product.getName();
+        productPrice = product.getPrice();
+        productQuantity = product.getQuantity();
+        productDescription = product.getDescription();
+        productImage1 = product.getImg1();
+        productImage2 = product.getImg2();
+        productImage3 = product.getImg3();
+        productMT = product.getMt();
+        productCS = product.getCs();
+        productSM = product.getSm();
+        productWR = product.getWr();
 
         ArrayList<String> arrCarousel = new ArrayList<>();
         arrCarousel.add(productImage1);
@@ -70,7 +120,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
             imageView.setScaleType(ImageView.ScaleType.FIT_XY);
             vfProductDetailsImage.addView(imageView);
         }
-        vfProductDetailsImage.setFlipInterval(3000);
+        vfProductDetailsImage.setFlipInterval(4000);
         vfProductDetailsImage.setAutoStart(true);
 
         Animation slide_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_in);
@@ -79,11 +129,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         vfProductDetailsImage.setOutAnimation(slide_out);
 
         txtPDName.setText(productName);
+
         txtPDPrice.setText("$ " + productPrice);
+
         txtPDDetails.setText("Movement Type: " + productMT +
-        "\n\nCase Size: " + productCS +
-        "\n\nStrap Material: "+productSM+
-        "\n\nWater Resistant: " + productWR);
+                "\n\nCase Size: " + productCS +
+                "\n\nStrap Material: " + productSM +
+                "\n\nWater Resistant: " + productWR);
         txtPDDescription.setText(productDescription);
 
     }

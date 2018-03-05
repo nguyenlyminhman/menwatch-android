@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.greenwich.adapter.BrandProductAdapter;
+import com.greenwich.model.Cart;
 import com.greenwich.model.Product;
 import com.greenwich.utils.Connection;
 import com.greenwich.utils.MenwatchServer;
@@ -26,6 +27,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,17 +54,19 @@ public class BrandActivity extends AppCompatActivity {
             finish();
         }
     }
+
     private void addListViewBrandProductEvents() {
         lvBrandProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), ProductDetailsActivity.class);
                 intent.putExtra("product_details", arrProduct.get(i));
-                Log.d("product_details", arrProduct.get(i)+"");
+                Log.d("product_details", arrProduct.get(i) + "");
                 startActivity(intent);
             }
         });
     }
+
     private void getBrandProductData(int brandId) {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         String getDataLink = MenwatchServer.linkProductByBrand + String.valueOf(brandId);
@@ -109,7 +113,7 @@ public class BrandActivity extends AppCompatActivity {
                                 productWR = jsonObjectDetails.getString("wr");
 
                                 arrProduct.add(new Product(productId, productIdStyle, productIdBrand,
-                                        productName, productPrice, productQuantity ,productDescription,
+                                        productName, productPrice, productQuantity, productDescription,
                                         productImage1, productImage2, productImage3,
                                         productMT, productCS, productSM, productWR));
                                 brandProductAdapter.notifyDataSetChanged();
@@ -146,16 +150,13 @@ public class BrandActivity extends AppCompatActivity {
         });
     }
 
-//    private void getBrandId() {
-//        idBrand = getIntent().getIntExtra("idBrand", -1);
-//        Log.d("asdf ", idBrand+"");
-//    }
-
     private void addControls() {
         tbBrand = findViewById(R.id.tbBrand);
         lvBrandProduct = findViewById(R.id.lvBrandProduct);
         arrProduct = new ArrayList<>();
         brandProductAdapter = new BrandProductAdapter(getApplicationContext(), arrProduct);
         lvBrandProduct.setAdapter(brandProductAdapter);
+
+
     }
 }

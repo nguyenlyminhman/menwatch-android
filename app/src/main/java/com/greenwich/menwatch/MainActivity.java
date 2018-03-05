@@ -31,6 +31,7 @@ import com.greenwich.adapter.BrandAdapter;
 import com.greenwich.adapter.LatestProductAdapter;
 import com.greenwich.adapter.StyleAdapter;
 import com.greenwich.model.Brand;
+import com.greenwich.model.Cart;
 import com.greenwich.model.Product;
 import com.greenwich.model.Style;
 import com.greenwich.utils.Connection;
@@ -78,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
     String productCS ="";
     String productSM ="";
     String productWR ="";
+
+    public static ArrayList<Cart> arrCart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -418,5 +422,10 @@ public class MainActivity extends AppCompatActivity {
         rvLatestProduct.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rvLatestProduct.setAdapter(latestProductAdapter);
 
+        if(arrCart!= null){
+
+        }else{
+            arrCart = new ArrayList<>();
+        }
     }
 }

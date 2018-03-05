@@ -70,7 +70,6 @@ public class LatestProductAdapter extends RecyclerView.Adapter<LatestProductAdap
             imageViewProduct = itemView.findViewById(R.id.imageViewProduct);
             txtProductName = itemView.findViewById(R.id.txtProductName);
             txtProductPrice = itemView.findViewById(R.id.txtProductPrice);
-
             //get item in RecyclerView
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,8 +80,6 @@ public class LatestProductAdapter extends RecyclerView.Adapter<LatestProductAdap
                     context.startActivity(intent);
                 }
             });
-
         }
     }
-
 }

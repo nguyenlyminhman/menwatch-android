@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".BrandActivity" />
         <activity android:name=".StyleActivity" />
-        <activity android:name=".ProductDetailsActivity"></activity>
+        <activity android:name=".ProductDetailsActivity" />
+        <activity android:name=".CartActivity"></activity>
     </application>
 
 </manifest>
