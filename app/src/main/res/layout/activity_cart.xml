@@ -1,9 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="10"
     tools:context="com.greenwich.menwatch.CartActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tbBrand"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#73B6E1"
+        app:title="Your Shopping Cart"
+        app:titleTextColor="#f0f0f0">
+    </android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_weight="7"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:id="@+id/txtCartNotice"
+                    android:gravity="center"
+                    android:textSize="30dp"
+                    android:text="Your Shopping Bag is Empty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+                <ListView
+                    android:id="@+id/lvCartItems"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+            </FrameLayout>
+    </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:layout_weight="1"
+            android:textSize="30dp"
+            android:text="Total: $ 999999999"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+        <Button
+            android:background="#73B6E1"
+            android:textColor="#f0f0f0"
+            android:layout_marginBottom="2dp"
+            android:id="@+id/btnCheckOut"
+            android:layout_weight="1"
+            android:text="Check Out"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <Button
+            android:background="#73B6E1"
+            android:textColor="#f0f0f0"
+            android:id="@+id/btnShopping"
+            android:layout_weight="1"
+            android:text="Continue to Shopping"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+</LinearLayout>
