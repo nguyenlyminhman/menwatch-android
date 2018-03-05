@@ -79,21 +79,22 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int quantity = Integer.parseInt(txtPDQuantity.getText().toString());
                 if (MainActivity.arrCart.size() > 0) {
-                    int qty = Integer.parseInt(txtPDQuantity.getText().toString());
                     boolean exist = false;
                     for (int i = 0; i < MainActivity.arrCart.size(); i++) {
                         if (MainActivity.arrCart.get(i).getProductId() == productId) {
-                            MainActivity.arrCart.get(i).setProductQuantity(MainActivity.arrCart.get(i).getProductQuantity() + qty);
-                            MainActivity.arrCart.get(i).setProductPrice(productPrice * MainActivity.arrCart.get(i).getProductQuantity());
-                            Log.d("itemPrice 1 ", productPrice * MainActivity.arrCart.get(i).getProductQuantity()+"");
+                            int newQuantity = MainActivity.arrCart.get(i).getProductQuantity() + quantity;
+                            if(newQuantity > productQuantity){
+                                Toast.makeText(ProductDetailsActivity.this, "This product only has " + productQuantity + " items in stock.", Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            MainActivity.arrCart.get(i).setProductQuantity(newQuantity);
                             exist = true;
                         }
                     }
                     if (!exist) {
-                        int quantity = Integer.parseInt(txtPDQuantity.getText().toString());
-                        Double itemPrice = quantity * productPrice;
-                        MainActivity.arrCart.add(new Cart(productId, productName, itemPrice, productImage1, quantity));
+                        MainActivity.arrCart.add(new Cart(productId, productName, productPrice, productImage1, quantity));
                     }
                 } else {
                     if (txtPDQuantity.getText().toString().isEmpty()) {
@@ -103,10 +104,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         Toast.makeText(ProductDetailsActivity.this, "This product only has " + productQuantity + " items in stock.", Toast.LENGTH_LONG).show();
                         return;
                     }else {
-                        int quantity = Integer.parseInt(txtPDQuantity.getText().toString());
-                        Double itemPrice = quantity * productPrice;
-                        Log.d("itemPrice 3 ", itemPrice+"");
-                        MainActivity.arrCart.add(new Cart(productId, productName, itemPrice, productImage1, quantity));
+                        MainActivity.arrCart.add(new Cart(productId, productName, productPrice, productImage1, quantity));
                     }
                 }
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);

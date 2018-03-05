@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class CartActivity extends AppCompatActivity {
     private void setTotalPrice() {
         double totalPrice = 0;
         for(int i =0; i<MainActivity.arrCart.size(); i++){
-            totalPrice +=MainActivity.arrCart.get(i).getProductPrice();
+            totalPrice += (MainActivity.arrCart.get(i).getProductPrice() * MainActivity.arrCart.get(i).getProductQuantity());
             txtCartItemsTotalsPrice.setText("$ " + totalPrice);
         }
     }
