@@ -10,15 +10,25 @@ public class Cart {
     public double productPrice;
     public String productImage;
     public int productQuantity;
+    public int productStock;
 
-    public Cart(int productId, String productName, double productPrice, String productImage, int productQuantity) {
+
+
+    public Cart(int productId, String productName, double productPrice, String productImage, int productQuantity, int productStock) {
         this.productId = productId;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productImage = productImage;
         this.productQuantity = productQuantity;
+        this.productStock = productStock;
+    }
+    public int getProductStock() {
+        return productStock;
     }
 
+    public void setProductStock(int productStock) {
+        this.productStock = productStock;
+    }
     public int getProductId() {
         return productId;
     }

@@ -1,5 +1,6 @@
 package com.greenwich.menwatch;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -14,7 +15,8 @@ import com.greenwich.adapter.CartAdapter;
 public class CartActivity extends AppCompatActivity {
 
     ListView lvCartItems;
-    TextView txtCartNotice, txtCartItemsTotalsPrice;
+    TextView txtCartNotice;
+    static TextView txtCartItemsTotalsPrice;
     Button btnCheckOut, btnShopping;
     Toolbar tbCartItems;
     CartAdapter cartAdapter;
@@ -25,15 +27,27 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         addControls();
         addToolbarCartItemEvents();
+        addBtnShoppingEvent();
         checkCartItems();
         setTotalPrice();
+//
     }
 
-    private void setTotalPrice() {
+    private void addBtnShoppingEvent() {
+        btnShopping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(CartActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+     public static void setTotalPrice() {
         double totalPrice = 0;
         for(int i =0; i<MainActivity.arrCart.size(); i++){
             totalPrice += (MainActivity.arrCart.get(i).getProductPrice() * MainActivity.arrCart.get(i).getProductQuantity());
-            txtCartItemsTotalsPrice.setText("$ " + totalPrice);
+            txtCartItemsTotalsPrice .setText("$ " + totalPrice);
         }
     }
 

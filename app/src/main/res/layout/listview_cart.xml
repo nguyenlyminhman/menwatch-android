@@ -53,7 +53,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content" />
             <ImageButton
-                android:src="@drawable/add"
+                android:src="@drawable/accept"
                 android:textAllCaps="false"
                 android:id="@+id/btnCartItemUpdate"
                 android:text="Update"

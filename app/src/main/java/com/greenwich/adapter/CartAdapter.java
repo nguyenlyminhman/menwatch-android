@@ -1,6 +1,7 @@
 package com.greenwich.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,11 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.greenwich.menwatch.CartActivity;
+import com.greenwich.menwatch.MainActivity;
+import com.greenwich.menwatch.ProductDetailsActivity;
 import com.greenwich.menwatch.R;
 import com.greenwich.model.Cart;
 import com.squareup.picasso.Picasso;
@@ -54,8 +59,8 @@ public class CartAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder = null;
+    public View getView(final int i, View view, ViewGroup viewGroup) {
+        ViewHolder  viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -78,6 +83,40 @@ public class CartAdapter extends BaseAdapter {
                 .placeholder(R.drawable.no_image)
                 .error(R.drawable.error_image)
                 .into(viewHolder.ivCartItemImage);
+
+
+        final ViewHolder finalViewHolder = viewHolder;
+        viewHolder.btnCartItemUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int updatedQuantity = Integer.parseInt(finalViewHolder.txtCartItemQuantity.getText().toString());
+                if(updatedQuantity==0){
+                    Toast.makeText(context.getApplicationContext(), "Product quantity is not a zero.", Toast.LENGTH_LONG).show();
+                    finalViewHolder.txtCartItemQuantity.setText(MainActivity.arrCart.get(i).getProductQuantity()+"");
+                    return;
+                }else if(updatedQuantity > MainActivity.arrCart.get(i).getProductStock() ){
+                    Toast.makeText(context.getApplicationContext(), "This product only has " + MainActivity.arrCart.get(i).getProductStock() + " items in stock.", Toast.LENGTH_LONG).show();
+                    finalViewHolder.txtCartItemQuantity.setText(MainActivity.arrCart.get(i).getProductQuantity()+"");
+                    return;
+                }
+                MainActivity.arrCart.get(i).setProductQuantity(updatedQuantity);
+                CartActivity.setTotalPrice();
+                Toast.makeText(context.getApplicationContext(), "Updated.", Toast.LENGTH_LONG).show();
+            }
+        });
+        viewHolder.btnCartItemRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.arrCart.remove(i);
+                CartActivity.setTotalPrice();
+                Toast.makeText(context.getApplicationContext(), "Removed.", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context.getApplicationContext(), CartActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
+
+
         return view;
     }
 }

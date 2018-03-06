@@ -94,17 +94,20 @@ public class ProductDetailsActivity extends AppCompatActivity {
                         }
                     }
                     if (!exist) {
-                        MainActivity.arrCart.add(new Cart(productId, productName, productPrice, productImage1, quantity));
+                        MainActivity.arrCart.add(new Cart(productId, productName, productPrice, productImage1, quantity, productQuantity));
                     }
                 } else {
                     if (txtPDQuantity.getText().toString().isEmpty()) {
                         Toast.makeText(ProductDetailsActivity.this, "Please! Enter the quantity to buy.", Toast.LENGTH_LONG).show();
                         return;
-                    } else if(Integer.parseInt(txtPDQuantity.getText().toString()) > productQuantity) {
+                    } else if(Integer.parseInt(txtPDQuantity.getText().toString()) == 0){
+                        Toast.makeText(ProductDetailsActivity.this, "Product quantity is not a zero.", Toast.LENGTH_LONG).show();
+                        return;
+                    }else if(Integer.parseInt(txtPDQuantity.getText().toString()) > productQuantity) {
                         Toast.makeText(ProductDetailsActivity.this, "This product only has " + productQuantity + " items in stock.", Toast.LENGTH_LONG).show();
                         return;
                     }else {
-                        MainActivity.arrCart.add(new Cart(productId, productName, productPrice, productImage1, quantity));
+                        MainActivity.arrCart.add(new Cart(productId, productName, productPrice, productImage1, quantity, productQuantity));
                     }
                 }
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
