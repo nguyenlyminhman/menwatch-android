@@ -6,17 +6,23 @@
     android:layout_height="match_parent"
     tools:context="com.greenwich.menwatch.MainActivity">
 
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/dlHome"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
 <ScrollView
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/tbHome"
@@ -26,6 +32,7 @@
                 app:title="Menwatch"
                 app:titleTextColor="#f0f0f0">
             </android.support.v7.widget.Toolbar>
+
 
             <ViewFlipper
                 android:id="@+id/vfHome"
@@ -49,21 +56,37 @@
                     android:textStyle="bold" />
 
                 <android.support.v7.widget.RecyclerView
+                    android:layout_marginBottom="50dp"
                     android:id="@+id/rvLatestProduct"
                     android:background="#73B6E1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
                 </android.support.v7.widget.RecyclerView>
             </LinearLayout>
-
         </LinearLayout>
 </ScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp">
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:src="@drawable/login" />
+        </LinearLayout>
+
+
         <android.support.design.widget.NavigationView
             android:id="@+id/nvHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

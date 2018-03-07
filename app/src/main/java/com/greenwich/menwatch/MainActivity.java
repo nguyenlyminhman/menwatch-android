@@ -1,8 +1,12 @@
 package com.greenwich.menwatch;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.icu.text.LocaleDisplayNames;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -53,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvLatestProduct;
     NavigationView nvHome;
     ListView lvBrand, lvStyle;
+    FloatingActionButton fab;
+
 
 
     ArrayList<Brand> arrBrand;
@@ -93,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         if (Connection.checkNetworkConnection(getApplicationContext())) {
             addToolbarEvents();
             addViewFlipperEvents();
+            addFabEvent();
 
             //add brand name to slide menu
             getBrandData();
@@ -109,6 +116,16 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Please, check your connection", Toast.LENGTH_LONG).show();
             finish();
         }
+    }
+
+    private void addFabEvent() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+               startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -405,6 +422,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        fab = findViewById(R.id.fab);
+        fab.setBackgroundTintList(ColorStateList.valueOf(Color
+                .parseColor("#73B6E1")));
+
+
         dlHome = findViewById(R.id.dlHome);
         tbHome = findViewById(R.id.tbHome);
         vfHome = findViewById(R.id.vfHome);
