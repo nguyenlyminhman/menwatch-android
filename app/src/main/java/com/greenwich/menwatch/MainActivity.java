@@ -126,15 +126,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    //    private void addRecyclerViewLatestProductEvents() {
-//        rvLatestProduct.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//    }
-
 
     private void setStyleItemEvent() {
         lvStyle.setOnItemClickListener(new AdapterView.OnItemClickListener() {

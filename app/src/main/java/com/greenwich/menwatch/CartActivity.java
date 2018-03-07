@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.greenwich.adapter.CartAdapter;
 
@@ -28,9 +29,25 @@ public class CartActivity extends AppCompatActivity {
         addControls();
         addToolbarCartItemEvents();
         addBtnShoppingEvent();
+        addBtnCheckOutEvent();
         checkCartItems();
         setTotalPrice();
 //
+    }
+
+    private void addBtnCheckOutEvent() {
+        btnCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (MainActivity.arrCart.size() > 0) {
+                    Intent intent = new Intent(CartActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(CartActivity.this, "Your shopping bag is empty.\n Please! Add some products to check out.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        });
     }
 
     private void addBtnShoppingEvent() {
@@ -43,20 +60,20 @@ public class CartActivity extends AppCompatActivity {
         });
     }
 
-     public static void setTotalPrice() {
+    public static void setTotalPrice() {
         double totalPrice = 0;
-        for(int i =0; i<MainActivity.arrCart.size(); i++){
+        for (int i = 0; i < MainActivity.arrCart.size(); i++) {
             totalPrice += (MainActivity.arrCart.get(i).getProductPrice() * MainActivity.arrCart.get(i).getProductQuantity());
-            txtCartItemsTotalsPrice .setText("$ " + totalPrice);
+            txtCartItemsTotalsPrice.setText("$ " + totalPrice);
         }
     }
 
     private void checkCartItems() {
-        if(MainActivity.arrCart.size() <= 0){
+        if (MainActivity.arrCart.size() <= 0) {
             cartAdapter.notifyDataSetChanged();
             txtCartNotice.setVisibility(View.VISIBLE);
             lvCartItems.setVisibility(View.INVISIBLE);
-        }else{
+        } else {
             cartAdapter.notifyDataSetChanged();
             txtCartNotice.setVisibility(View.INVISIBLE);
             lvCartItems.setVisibility(View.VISIBLE);

@@ -79,7 +79,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
         btnAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int quantity = Integer.parseInt(txtPDQuantity.getText().toString());
+                String qty = txtPDQuantity.getText().toString();
+
+                if(qty.isEmpty()){
+                    Toast.makeText(ProductDetailsActivity.this, "Please, Enter the quantity to buy.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                int quantity = Integer.parseInt(qty);
+                if(quantity == 0){
+                    Toast.makeText(ProductDetailsActivity.this, "Product quantity is not a zero", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (MainActivity.arrCart.size() > 0) {
                     boolean exist = false;
                     for (int i = 0; i < MainActivity.arrCart.size(); i++) {
