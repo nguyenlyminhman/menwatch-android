@@ -16,10 +16,11 @@
         app:title="Brand"
         app:titleTextColor="#f0f0f0">
     </android.support.v7.widget.Toolbar>
+
     <ListView
         android:id="@+id/lvBrandProduct"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
     </ListView>
-
 </LinearLayout>
+

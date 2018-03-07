@@ -21,6 +21,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -57,9 +59,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView rvLatestProduct;
     NavigationView nvHome;
     ListView lvBrand, lvStyle;
-    FloatingActionButton fab;
 
-
+    Button btnMenuRegister, btnMenuLogin;
 
     ArrayList<Brand> arrBrand;
     BrandAdapter brandAdapter;
@@ -79,14 +80,14 @@ public class MainActivity extends AppCompatActivity {
     String productName = "";
     Double productPrice = 0.0;
     int productQuantity = 0;
-    String productDescription="";
+    String productDescription = "";
     String productImage1 = "";
     String productImage2 = "";
     String productImage3 = "";
-    String productMT ="";
-    String productCS ="";
-    String productSM ="";
-    String productWR ="";
+    String productMT = "";
+    String productCS = "";
+    String productSM = "";
+    String productWR = "";
 
     public static ArrayList<Cart> arrCart;
 
@@ -99,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         if (Connection.checkNetworkConnection(getApplicationContext())) {
             addToolbarEvents();
             addViewFlipperEvents();
-            addFabEvent();
-
+            addBtnMenuLoginEvent();
+            addBtnMenuRgisterEvent();
             //add brand name to slide menu
             getBrandData();
             //add style name to slide menu
@@ -118,12 +119,21 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void addFabEvent() {
-        fab.setOnClickListener(new View.OnClickListener() {
+    private void addBtnMenuLoginEvent() {
+        btnMenuLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-               startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void addBtnMenuRgisterEvent() {
+        btnMenuRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "Update next version.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -136,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.mnCartIcon:
                 Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                 startActivity(intent);
@@ -300,20 +310,20 @@ public class MainActivity extends AppCompatActivity {
                                 productDescription = jsonObject.getString("description");
                                 //get image jsonb
                                 JSONObject jsonObjectImage = jsonObject.getJSONObject("image");
-                                productImage1  = MenwatchServer.linkImage + jsonObjectImage.getString("img1");
-                                productImage2  = MenwatchServer.linkImage + jsonObjectImage.getString("img2");
-                                productImage3  = MenwatchServer.linkImage + jsonObjectImage.getString("img3");
+                                productImage1 = MenwatchServer.linkImage + jsonObjectImage.getString("img1");
+                                productImage2 = MenwatchServer.linkImage + jsonObjectImage.getString("img2");
+                                productImage3 = MenwatchServer.linkImage + jsonObjectImage.getString("img3");
 //get image jsonb
                                 JSONObject jsonObjectDetails = jsonObject.getJSONObject("details");
-                                productCS  = jsonObjectDetails.getString("cs");
-                                productMT  = jsonObjectDetails.getString("mt");
-                                productSM= jsonObjectDetails.getString("sm");
-                                productWR  = jsonObjectDetails.getString("wr");
+                                productCS = jsonObjectDetails.getString("cs");
+                                productMT = jsonObjectDetails.getString("mt");
+                                productSM = jsonObjectDetails.getString("sm");
+                                productWR = jsonObjectDetails.getString("wr");
 
                                 arrProduct.add(new Product(productId, productIdStyle, productIdBrand,
                                         productName, productPrice, productQuantity, productDescription,
                                         productImage1, productImage2, productImage3,
-                                        productMT, productCS, productSM, productWR ));
+                                        productMT, productCS, productSM, productWR));
                                 latestProductAdapter.notifyDataSetChanged();
                             }
                         } catch (JSONException e) {
@@ -418,15 +428,11 @@ public class MainActivity extends AppCompatActivity {
                 dlHome.openDrawer(GravityCompat.START);
             }
         });
-
     }
 
     private void addControls() {
-        fab = findViewById(R.id.fab);
-        fab.setBackgroundTintList(ColorStateList.valueOf(Color
-                .parseColor("#73B6E1")));
-
-
+        btnMenuLogin = findViewById(R.id.btnMenuLogin);
+        btnMenuRegister = findViewById(R.id.btnMenuRegister);
         dlHome = findViewById(R.id.dlHome);
         tbHome = findViewById(R.id.tbHome);
         vfHome = findViewById(R.id.vfHome);
@@ -452,9 +458,9 @@ public class MainActivity extends AppCompatActivity {
         rvLatestProduct.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         rvLatestProduct.setAdapter(latestProductAdapter);
 
-        if(arrCart!= null){
+        if (arrCart != null) {
 
-        }else{
+        } else {
             arrCart = new ArrayList<>();
         }
     }

@@ -66,22 +66,6 @@
         </LinearLayout>
 </ScrollView>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="15dp">
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:src="@drawable/login" />
-        </LinearLayout>
-
-
         <android.support.design.widget.NavigationView
             android:id="@+id/nvHome"
             android:layout_width="match_parent"
@@ -129,8 +113,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 </ListView>
+
+                <Button
+                android:background="#73B6E1"
+                android:textColor="#f0f0f0"
+                android:layout_marginBottom="2dp"
+                    android:layout_marginTop="5dp"
+                android:id="@+id/btnMenuLogin"
+                android:text="Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+                <Button
+                    android:background="#73B6E1"
+                    android:textColor="#f0f0f0"
+                    android:layout_marginBottom="2dp"
+                    android:id="@+id/btnMenuRegister"
+                    android:text="Register"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
         </android.support.design.widget.NavigationView>
+
     </android.support.v4.widget.DrawerLayout>
 
 </LinearLayout>

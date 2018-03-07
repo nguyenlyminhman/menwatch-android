@@ -1,6 +1,9 @@
 package com.greenwich.menwatch;
 
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -35,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BrandActivity extends AppCompatActivity {
+
     Toolbar tbBrand;
     ListView lvBrandProduct;
     BrandProductAdapter brandProductAdapter;
@@ -174,7 +178,5 @@ public class BrandActivity extends AppCompatActivity {
         arrProduct = new ArrayList<>();
         brandProductAdapter = new BrandProductAdapter(getApplicationContext(), arrProduct);
         lvBrandProduct.setAdapter(brandProductAdapter);
-
-
     }
 }
