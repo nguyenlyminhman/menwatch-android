@@ -13,83 +13,84 @@
         android:layout_height="match_parent">
 
 
-<ScrollView
+        <ScrollView
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <android.support.v7.widget.Toolbar
-                android:id="@+id/tbHome"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#000"
-                app:title="Menwatch"
-                app:titleTextColor="#f0f0f0">
-            </android.support.v7.widget.Toolbar>
-
-
-            <ViewFlipper
-                android:id="@+id/vfHome"
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
-            </ViewFlipper>
+            android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:text=" Latest product"
-                    android:textColor="#f0f0f0"
-                    android:background="#73B6E1"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
 
-                <android.support.v7.widget.RecyclerView
-                    android:layout_marginBottom="50dp"
-                    android:id="@+id/rvLatestProduct"
-                    android:background="#73B6E1"
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/tbHome"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </android.support.v7.widget.RecyclerView>
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="#000"
+                    app:title="Menwatch"
+                    app:titleTextColor="#f0f0f0"></android.support.v7.widget.Toolbar>
+
+
+                <ViewFlipper
+                    android:id="@+id/vfHome"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"></ViewFlipper>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="0dp"
+                        android:background="#73B6E1"
+                        android:text=" Latest product"
+                        android:textColor="#f0f0f0"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rvLatestProduct"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="50dp"
+                        android:background="#73B6E1"></android.support.v7.widget.RecyclerView>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-</ScrollView>
+        </ScrollView>
 
         <android.support.design.widget.NavigationView
             android:id="@+id/nvHome"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="start">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
+                    android:background="#000"
                     android:gravity="center"
                     android:text="Menwatch"
                     android:textColor="#f0f0f0"
-                    android:background="#000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
                 <TextView
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_margin="0dp"
-                    android:text=" Brand"
                     android:background="#73B6E1"
+                    android:text=" Brand"
                     android:textColor="#f0f0f0"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -98,39 +99,55 @@
                     android:id="@+id/lvBrand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                 </ListView>
+
                 <TextView
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:layout_margin="0dp"
-                    android:text=" Style"
                     android:background="#73B6E1"
+                    android:text=" Style"
                     android:textColor="#f0f0f0"
                     android:textSize="20sp"
                     android:textStyle="bold" />
+
                 <ListView
                     android:id="@+id/lvStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </ListView>
+                    android:layout_height="wrap_content"></ListView>
 
-                <Button
-                android:background="#73B6E1"
-                android:textColor="#f0f0f0"
-                android:layout_marginBottom="2dp"
-                    android:layout_marginTop="5dp"
-                android:id="@+id/btnMenuLogin"
-                android:text="Login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-                <Button
-                    android:background="#73B6E1"
-                    android:textColor="#f0f0f0"
-                    android:layout_marginBottom="2dp"
-                    android:id="@+id/btnMenuRegister"
-                    android:text="Register"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:background="#f0f0f0"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Button
+                        android:id="@+id/btnMenuLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginTop="5dp"
+                        android:background="#73B6E1"
+                        android:text="Login"
+                        android:textColor="#f0f0f0" />
+
+                    <Button
+                        android:id="@+id/btnMenuLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="2dp"
+                        android:background="#73B6E1"
+                        android:text="Logout"
+                        android:textColor="#f0f0f0" />
+                    </FrameLayout>
+                </LinearLayout>
             </LinearLayout>
         </android.support.design.widget.NavigationView>
 

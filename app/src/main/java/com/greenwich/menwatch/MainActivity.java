@@ -43,6 +43,7 @@ import com.greenwich.model.Cart;
 import com.greenwich.model.Product;
 import com.greenwich.model.Style;
 import com.greenwich.utils.Connection;
+import com.greenwich.utils.CustomerSession;
 import com.greenwich.utils.MenwatchServer;
 import com.squareup.picasso.Picasso;
 
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView nvHome;
     ListView lvBrand, lvStyle;
 
-    Button btnMenuRegister, btnMenuLogin;
+    Button btnMenuRegister, btnMenuLogin, btnMenuLogout;
 
     ArrayList<Brand> arrBrand;
     BrandAdapter brandAdapter;
@@ -92,6 +93,9 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<Cart> arrCart;
 
 
+    CustomerSession cSession;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             addToolbarEvents();
             addViewFlipperEvents();
             addBtnMenuLoginEvent();
-            addBtnMenuRgisterEvent();
+            addBtnMenuLogOutEvent();
             //add brand name to slide menu
             getBrandData();
             //add style name to slide menu
@@ -119,24 +123,25 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void addBtnMenuLogOutEvent() {
+        btnMenuLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cSession.logoutCustomer();
+            }
+        });
+    }
     private void addBtnMenuLoginEvent() {
         btnMenuLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("addBtnMenuLoginEvent", cSession.isCustomerLoggedIn()+"");
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
     }
 
-    private void addBtnMenuRgisterEvent() {
-        btnMenuRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Update next version.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -431,8 +436,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        cSession = new CustomerSession(getApplicationContext());
+        btnMenuLogout = findViewById(R.id.btnMenuLogout);
         btnMenuLogin = findViewById(R.id.btnMenuLogin);
-        btnMenuRegister = findViewById(R.id.btnMenuRegister);
+        if(!cSession.isCustomerLoggedIn()){
+            btnMenuLogout.setVisibility(View.INVISIBLE);
+            btnMenuLogin.setVisibility(View.VISIBLE);
+        }else{
+            btnMenuLogin.setVisibility(View.INVISIBLE);
+            btnMenuLogout.setVisibility(View.VISIBLE);
+        }
         dlHome = findViewById(R.id.dlHome);
         tbHome = findViewById(R.id.tbHome);
         vfHome = findViewById(R.id.vfHome);
