@@ -85,11 +85,11 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_margin="0dp"
                     android:background="#73B6E1"
+                    android:gravity="center_vertical"
                     android:text=" Brand"
                     android:textColor="#f0f0f0"
                     android:textSize="20sp"
@@ -103,11 +103,11 @@
                 </ListView>
 
                 <TextView
-                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_margin="0dp"
                     android:background="#73B6E1"
+                    android:gravity="center_vertical"
                     android:text=" Style"
                     android:textColor="#f0f0f0"
                     android:textSize="20sp"
@@ -125,27 +125,47 @@
                     android:orientation="vertical">
 
                     <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <Button
-                        android:id="@+id/btnMenuLogin"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:layout_marginTop="5dp"
-                        android:background="#73B6E1"
-                        android:text="Login"
-                        android:textColor="#f0f0f0" />
+                        android:layout_height="match_parent">
 
-                    <Button
-                        android:id="@+id/btnMenuLogout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:background="#73B6E1"
-                        android:text="Logout"
-                        android:textColor="#f0f0f0" />
+                        <LinearLayout
+                            android:layout_marginTop="4dp"
+                            android:weightSum="10"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <Button
+                                android:layout_marginRight="1dp"
+                                android:layout_weight="5"
+                                android:id="@+id/btnMenuRegister"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginTop="5dp"
+                                android:background="#73B6E1"
+                                android:text="Register"
+                                android:textColor="#f0f0f0" />
+                            <Button
+                                android:layout_marginLeft="1dp"
+                                android:layout_weight="5"
+                                android:id="@+id/btnMenuLogin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="2dp"
+                                android:layout_marginTop="5dp"
+                                android:background="#73B6E1"
+                                android:text="Login"
+                                android:textColor="#f0f0f0" />
+                        </LinearLayout>
+
+                        <Button
+                            android:layout_marginTop="4dp"
+                            android:id="@+id/btnMenuLogout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="#73B6E1"
+                            android:text="Logout"
+                            android:textColor="#f0f0f0" />
                     </FrameLayout>
                 </LinearLayout>
             </LinearLayout>

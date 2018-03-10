@@ -83,7 +83,6 @@ public class BrandActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(getApplicationContext(), ProductDetailsActivity.class);
                 intent.putExtra("product_details", arrProduct.get(i));
-                Log.d("product_details", arrProduct.get(i) + "");
                 startActivity(intent);
             }
         });

@@ -439,10 +439,13 @@ public class MainActivity extends AppCompatActivity {
         cSession = new CustomerSession(getApplicationContext());
         btnMenuLogout = findViewById(R.id.btnMenuLogout);
         btnMenuLogin = findViewById(R.id.btnMenuLogin);
+        btnMenuRegister = findViewById(R.id.btnMenuRegister);
         if(!cSession.isCustomerLoggedIn()){
+            btnMenuRegister.setVisibility(View.VISIBLE);
             btnMenuLogout.setVisibility(View.INVISIBLE);
             btnMenuLogin.setVisibility(View.VISIBLE);
         }else{
+            btnMenuRegister.setVisibility(View.INVISIBLE);
             btnMenuLogin.setVisibility(View.INVISIBLE);
             btnMenuLogout.setVisibility(View.VISIBLE);
         }

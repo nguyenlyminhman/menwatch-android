@@ -28,17 +28,18 @@ public class CustomerSession {
 
     // Email address (make variable public to access from outside)
     public static final String KEY_ID = "CustomerId";
-
+    public static final String KEY_EMAIL = "email";
     public CustomerSession(Context context) {
         this._context = context;
         sharedPreferences = _context.getSharedPreferences(PREFER_NAME, 0);
         editor = sharedPreferences.edit();
     }
 
-    public void createCustomerLoginSession(String name, String email) {
+    public void createCustomerLoginSession(String id, String email, String fullname) {
         editor.putBoolean(IS_USER_LOGIN, true);
-        editor.putString(KEY_NAME, name);
-        editor.putString(KEY_ID, email);
+        editor.putString(KEY_ID, id);
+        editor.putString(KEY_EMAIL, id);
+        editor.putString(KEY_NAME, fullname);
         editor.commit();
     }
 
