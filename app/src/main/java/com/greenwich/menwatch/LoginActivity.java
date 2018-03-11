@@ -27,6 +27,7 @@ import com.greenwich.utils.MenwatchServer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,74 +60,51 @@ public class LoginActivity extends AppCompatActivity {
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 String getDataLink = MenwatchServer.linkLogin;
 
-//                JsonObjectRequest jsObjRequest = new JsonObjectRequest
-//                        (Request.Method.POST, getDataLink, null, new Response.Listener<JSONObject>() {
-//                            @Override
-//                            public void onResponse(JSONObject response) {
-//                                try {
-//                                    JSONArray jsonArray = response.getJSONArray("data");
-//                                    Log.d("okkoko", jsonArray + "");
-//
-//                                }catch (Exception ex){}
-//
-//                            }
-//                        }, new Response.ErrorListener() {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-//                            }
-//                        }) {
-//                    @Override
-//                    protected Map<String, String> getParams() throws AuthFailureError {
-//                        Map<String, String> param = new HashMap<String, String>();
-//                        param.put("email", email);
-//                        param.put("password", password);
-////                        param.put("domain", "http://192.168.247.2:3000");
-//                        return param;
-//                    }
-//                };
-
                 StringRequest postRequest = new StringRequest(Request.Method.POST, getDataLink,
-                        new Response.Listener<String>()
-                        {
+                        new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
                                 try {
-                                    if(response != null) {
-                                        JSONObject jsonObject = new JSONObject(response);
-                                        JSONObject jsonData = jsonObject.getJSONObject("data");
-                                        String fullname = jsonData.getString("fistname") + " " + jsonData.getString("lastname");
-                                        String id = jsonData.getInt("id")+"";
-                                        String email = jsonData.getString("email");
-                                        cSession.createCustomerLoginSession(id, email, fullname);
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                        // Add new Flag to start new Activity
-                                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(intent);
-                                        finish();
+                                    if (response != null) {
+                                        JSONObject jsonObject= new JSONObject(response);
+                                        if (jsonObject.getString("data").equals("err_email")) {
+                                            Toast.makeText(LoginActivity.this, "Email is not found.", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        } else if (jsonObject.getString("data").equals("err_pass")) {
+                                            Toast.makeText(LoginActivity.this, "Password is wrong.", Toast.LENGTH_SHORT).show();
+                                            return;
+                                        } else {
+                                            JSONObject jsonData = jsonObject.getJSONObject("data");
+                                            String fullname = jsonData.getString("fistname") + " " + jsonData.getString("lastname");
+                                            String id = jsonData.getInt("id") + "";
+                                            String email = jsonData.getString("email");
+                                            cSession.createCustomerLoginSession(id, email, fullname);
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            // Add new Flag to start new Activity
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                            startActivity(intent);
+                                            finish();
+                                        }
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }
                         },
-                        new Response.ErrorListener()
-                        {
+                        new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                Log.d("Error.Response", error+"");
+                                Log.d("Error.Response", error + "");
                             }
                         }
                 ) {
                     @Override
-                    protected Map<String, String> getParams()
-                    {
-                        Map<String, String>  params = new HashMap<String, String>();
+                    protected Map<String, String> getParams() {
+                        Map<String, String> params = new HashMap<String, String>();
                         params.put("email", email);
                         params.put("password", password);
                         params.put("domain", "http://192.168.247.2:3000");
-
                         return params;
                     }
                 };
