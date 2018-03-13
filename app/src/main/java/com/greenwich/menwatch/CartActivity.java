@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.greenwich.adapter.CartAdapter;
+import com.greenwich.utils.CustomerSession;
 
 
 public class CartActivity extends AppCompatActivity {
@@ -21,6 +22,8 @@ public class CartActivity extends AppCompatActivity {
     Button btnCheckOut, btnShopping;
     Toolbar tbCartItems;
     CartAdapter cartAdapter;
+
+    CustomerSession cSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +43,15 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (MainActivity.arrCart.size() > 0) {
-                    Intent intent = new Intent(CartActivity.this, LoginActivity.class);
-                    startActivity(intent);
+                    if(!cSession.isCustomerLoggedIn()){
+                        Intent intent = new Intent(CartActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    }else{
+                        Intent intent = new Intent(CartActivity.this, CheckOutActivity.class);
+                        startActivity(intent);
+                    }
                 } else {
-                    Toast.makeText(CartActivity.this, "Your shopping bag is empty.\n Please! Add some products to check out.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CartActivity.this, "Your shopping bag is empty.", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -92,6 +100,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void addControls() {
+        cSession = new CustomerSession(getApplicationContext());
         lvCartItems = findViewById(R.id.lvCartItems);
         txtCartNotice = findViewById(R.id.txtCartNotice);
         txtCartItemsTotalsPrice = findViewById(R.id.txtCartItemsTotalsPrice);

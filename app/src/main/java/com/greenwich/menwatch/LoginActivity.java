@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void onResponse(String response) {
                                 try {
                                     if (response != null) {
-                                        JSONObject jsonObject= new JSONObject(response);
+                                        JSONObject jsonObject = new JSONObject(response);
                                         if (jsonObject.getString("data").equals("err_email")) {
                                             Toast.makeText(LoginActivity.this, "Email is not found.", Toast.LENGTH_SHORT).show();
                                             return;
@@ -104,24 +104,11 @@ public class LoginActivity extends AppCompatActivity {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("email", email);
                         params.put("password", password);
-                        params.put("domain", "http://192.168.247.2:3000");
+                        params.put("domain", MenwatchServer.host);
                         return params;
                     }
                 };
                 requestQueue.add(postRequest);
-
-
-//                if(email.equals("email") && password.equals("pass")){
-//                    cSession.createCustomerLoginSession("Android Login Example",
-//                            "nlmman@gmail.com");
-//                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    // Add new Flag to start new Activity
-//                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                    startActivity(intent);
-//                    finish();
-//                }
-
             }
         });
     }

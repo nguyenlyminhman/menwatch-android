@@ -66,10 +66,10 @@ public class CustomerSession {
         // customer name
         customer.put(KEY_NAME, sharedPreferences.getString(KEY_NAME, null));
 
-        // user email id
+        // customer email id
         customer.put(KEY_ID, sharedPreferences.getString(KEY_ID, null));
 
-        // return user
+        // return customer
         return customer;
     }
 
@@ -78,10 +78,10 @@ public class CustomerSession {
      */
     public void logoutCustomer() {
 
-        // Clearing all user data from Shared Preferences
+        // Clearing all customer data from Shared Preferences
         editor.clear();
         editor.commit();
-        // After logout redirect user to Login Activity
+        // After logout redirect customer to Login Activity
         Intent i = new Intent(_context.getApplicationContext(), MainActivity.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
