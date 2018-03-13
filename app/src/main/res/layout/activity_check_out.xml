@@ -82,11 +82,11 @@
                     android:paddingTop="5dp">
 
                     <EditText
-                        android:id="@+id/txtReceiverEmail"
+                        android:id="@+id/txtReceiverPhone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress" />
+                        android:hint="Phone number"
+                        android:inputType="phone" />
                 </android.support.design.widget.TextInputLayout>
 
                 <TextView
@@ -97,8 +97,6 @@
                     android:textColor="#73B6E1"
                     android:textSize="25dp"
                     android:textStyle="bold" />
-
-
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -121,7 +119,6 @@
                     android:layout_height="wrap_content"
                     />
 
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -133,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="3dp"
-                        android:text="CheckOut" />
+                        android:text="Confirm" />
 
                     <Button
                         android:id="@+id/btnResetCheckOut"

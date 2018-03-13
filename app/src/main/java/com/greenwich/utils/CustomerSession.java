@@ -28,7 +28,7 @@ public class CustomerSession {
 
     // Email address (make variable public to access from outside)
     public static final String KEY_ID = "CustomerId";
-    public static final String KEY_EMAIL = "email";
+    public static final String KEY_EMAIL = "CustomerEmail";
     public CustomerSession(Context context) {
         this._context = context;
         sharedPreferences = _context.getSharedPreferences(PREFER_NAME, 0);
@@ -38,7 +38,7 @@ public class CustomerSession {
     public void createCustomerLoginSession(String id, String email, String fullname) {
         editor.putBoolean(IS_USER_LOGIN, true);
         editor.putString(KEY_ID, id);
-        editor.putString(KEY_EMAIL, id);
+        editor.putString(KEY_EMAIL, email);
         editor.putString(KEY_NAME, fullname);
         editor.commit();
     }
@@ -69,6 +69,7 @@ public class CustomerSession {
         // customer email id
         customer.put(KEY_ID, sharedPreferences.getString(KEY_ID, null));
 
+        customer.put(KEY_EMAIL, sharedPreferences.getString(KEY_EMAIL, null));
         // return customer
         return customer;
     }
@@ -90,8 +91,6 @@ public class CustomerSession {
         // Staring Login Activity
         _context.getApplicationContext().startActivity(i);
     }
-
-
     // Check for login
     public boolean isCustomerLoggedIn() {
         return sharedPreferences.getBoolean(IS_USER_LOGIN, false);

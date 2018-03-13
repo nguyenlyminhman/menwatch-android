@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                                             JSONObject jsonData = jsonObject.getJSONObject("data");
                                             String fullname = jsonData.getString("fistname") + " " + jsonData.getString("lastname");
                                             String id = jsonData.getInt("id") + "";
-                                            String email = jsonData.getString("email");
+                                            String email = jsonData.getString("email")+"";
                                             cSession.createCustomerLoginSession(id, email, fullname);
                                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

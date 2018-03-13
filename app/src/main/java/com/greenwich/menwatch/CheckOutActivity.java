@@ -37,7 +37,7 @@ import java.util.Map;
 public class CheckOutActivity extends AppCompatActivity {
 
     Button btnCheckOut, btnResetCheckOut;
-    EditText txtReceiverName, txtReceiverAddress, txtReceiverEmail, txtCardName;
+    EditText txtReceiverName, txtReceiverAddress, txtReceiverPhone, txtCardName;
     Toolbar tbCheckOut;
     CustomerSession cSession;
     CardInputWidget mCardInputWidget;
@@ -58,7 +58,7 @@ public class CheckOutActivity extends AppCompatActivity {
             public void onClick(View view) {
                 txtReceiverName.setText("");
                 txtReceiverAddress.setText("");
-                txtReceiverEmail.setText("");
+                txtReceiverPhone.setText("");
                 txtCardName.setText("");
             }
         });
@@ -69,7 +69,7 @@ public class CheckOutActivity extends AppCompatActivity {
                 final String publishableApiKey = "pk_test_ELqaVegi7UJMKfrsEWgR7jfd";
                 final String ReceiverName = txtReceiverName.getText().toString().trim();
                 final String ReceiverAddress = txtReceiverAddress.getText().toString().trim();
-                final String ReceiverEmail = txtReceiverEmail.getText().toString().trim();
+                final String ReceiverPhone = txtReceiverPhone.getText().toString().trim();
                 final Stripe stripe = new Stripe(getApplicationContext(), publishableApiKey);
                 Card card = mCardInputWidget.getCard();
                 final String CardName = txtCardName.getText().toString().trim();
@@ -79,7 +79,7 @@ public class CheckOutActivity extends AppCompatActivity {
                 } else if (ReceiverAddress.isEmpty()) {
                     Toast.makeText(CheckOutActivity.this, "Enter the receiver address.", Toast.LENGTH_SHORT).show();
                     return;
-                } else if (ReceiverEmail.isEmpty()) {
+                } else if (ReceiverPhone.isEmpty()) {
                     Toast.makeText(CheckOutActivity.this, "Enter the receiver email.", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (CardName.isEmpty()) {
@@ -138,9 +138,11 @@ public class CheckOutActivity extends AppCompatActivity {
                                 Map<String, String> params = new HashMap<String, String>();
                                 params.put("ReceiverName", ReceiverName);
                                 params.put("ReceiverAddress", ReceiverAddress);
-                                params.put("ReceiverEmail", ReceiverEmail);
+                                params.put("ReceiverPhone", ReceiverPhone);
 
                                 params.put("CustomerId", cSession.getCustomerDetails().get("CustomerId") + "");
+                                params.put("CustomerEmail", cSession.getCustomerDetails().get("CustomerEmail") + "");
+                                params.put("CustomerFullname", cSession.getCustomerDetails().get("CustomerName") + "");
                                 params.put("totalPrice", totalPrice + "");
                                 params.put("OrderDetail", jsonArray.toString());
                                 params.put("StripeId", token.getId());
@@ -194,7 +196,7 @@ public class CheckOutActivity extends AppCompatActivity {
         btnResetCheckOut = findViewById(R.id.btnResetCheckOut);
         txtReceiverName = findViewById(R.id.txtReceiverName);
         txtReceiverAddress = findViewById(R.id.txtReceiverAddress);
-        txtReceiverEmail = findViewById(R.id.txtReceiverEmail);
+        txtReceiverPhone = findViewById(R.id.txtReceiverPhone);
         txtCardName = findViewById(R.id.txtCardName);
         tbCheckOut = findViewById(R.id.tbCheckOut);
     }
