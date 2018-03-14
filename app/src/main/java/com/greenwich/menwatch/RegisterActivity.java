@@ -33,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity {
     EditText txtRegisterFirtsname, txtRegisterLastname, txtRegisterAddress, txtRegisterPhone;
     Button btnRegisterNew, btnRegisterReset;
     Toolbar tbRegister;
-    CustomerSession cSession;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,6 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegisterNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cSession = new CustomerSession(getApplicationContext());
                 final String email = txtRegisterEmail.getText().toString().trim();
                 final String password = txtRegisterPassword.getText().toString().trim();
                 final String confirmPassword = txtRegisterConfirmPassword.getText().toString().trim();
@@ -69,10 +67,10 @@ public class RegisterActivity extends AppCompatActivity {
                                     if (response != null) {
                                         JSONObject jsonObject = new JSONObject(response);
                                         if (jsonObject.getString("data").equals("fail_email")) {
-                                            Toast.makeText(RegisterActivity.this, "Email is already exists.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterActivity.this, "Email is already exists.", Toast.LENGTH_LONG).show();
                                             return;
                                         } else if(jsonObject.getString("data").equals("success")) {
-                                            Toast.makeText(RegisterActivity.this, "Register successfully.", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(RegisterActivity.this, "Register successfully.", Toast.LENGTH_LONG).show();
                                             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                             startActivity(intent);
                                             return;
