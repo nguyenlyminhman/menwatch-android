@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +57,30 @@ public class RegisterActivity extends AppCompatActivity {
                 final String address = txtRegisterAddress.getText().toString().trim();
                 final String phone = txtRegisterPhone.getText().toString().trim();
 
+                if(!checkEmailValid(email)){
+                    Toast.makeText(RegisterActivity.this, "Email is wrong format.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!password.equals(confirmPassword)){
+                    Toast.makeText(RegisterActivity.this, "Password is mismatch.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(firstname.isEmpty()){
+                    Toast.makeText(RegisterActivity.this, "Enter the first name.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(lastname.isEmpty()){
+                    Toast.makeText(RegisterActivity.this, "Enter the last name.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(address.isEmpty()){
+                    Toast.makeText(RegisterActivity.this, "Enter the address.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(phone.isEmpty()){
+                    Toast.makeText(RegisterActivity.this, "Enter the phone.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 String getDataLink = MenwatchServer.linkRegister;
 
@@ -106,6 +131,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+    //check email valid
+    boolean checkEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     private void addBtnRegisterResetEvent() {

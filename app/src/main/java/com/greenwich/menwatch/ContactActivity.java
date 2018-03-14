@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -62,6 +63,22 @@ public class ContactActivity extends AppCompatActivity {
                 final String phone = txtContactPhone.getText().toString().trim();
                 final String content = txtContactContent.getText().toString().trim();
 
+                if(!checkEmailValid(email)){
+                    Toast.makeText(ContactActivity.this, "Email is wrong format.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(fullname.isEmpty()){
+                    Toast.makeText(ContactActivity.this, "Enter the fullname.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(phone.isEmpty()){
+                    Toast.makeText(ContactActivity.this, "Enter the phone.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(content.isEmpty()){
+                    Toast.makeText(ContactActivity.this, "Enter the content.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                 String getDataLink = MenwatchServer.linkContact;
 
@@ -108,6 +125,10 @@ public class ContactActivity extends AppCompatActivity {
                 requestQueue.add(postRequest);
             }
         });
+    }
+    //check email valid
+    boolean checkEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
     @Override
