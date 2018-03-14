@@ -85,9 +85,10 @@ public class CheckOutActivity extends AppCompatActivity {
                 } else if (CardName.isEmpty()) {
                     Toast.makeText(CheckOutActivity.this, "Enter the card holder name.", Toast.LENGTH_SHORT).show();
                     return;
-
+                }else if(card==null){
+                    Toast.makeText(CheckOutActivity.this, "Card is not valid.", Toast.LENGTH_SHORT).show();
+                    return;
                 }
-                Log.d("card validation", card.validateCard()+"");
                 card.setName(CardName);
                 stripe.createToken(card, publishableApiKey, new TokenCallback() {
                     public void onSuccess(final Token token) {
@@ -107,6 +108,7 @@ public class CheckOutActivity extends AppCompatActivity {
                                                     Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                                                     startActivity(intent);
                                                 }
+
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
                                             }
@@ -146,14 +148,12 @@ public class CheckOutActivity extends AppCompatActivity {
                                 params.put("totalPrice", totalPrice + "");
                                 params.put("OrderDetail", jsonArray.toString());
                                 params.put("StripeId", token.getId());
-
                                 params.put("domain", MenwatchServer.host);
                                 return params;
                             }
                         };
                         requestQueue.add(postRequest);
                     }
-
                     public void onError(Exception error) {
                         Log.d("Stripe", error.getLocalizedMessage());
                     }

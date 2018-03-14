@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView nvHome;
     ListView lvBrand, lvStyle;
 
-    Button btnMenuRegister, btnMenuLogin, btnMenuLogout;
+    Button btnMenuRegister, btnMenuLogin, btnMenuLogout, btnMenuAbout, btnMenuContact;
 
     ArrayList<Brand> arrBrand;
     BrandAdapter brandAdapter;
@@ -106,6 +106,9 @@ public class MainActivity extends AppCompatActivity {
             addViewFlipperEvents();
             addBtnMenuLoginEvent();
             addBtnMenuLogOutEvent();
+            addBtnMenuRegisterEvent();
+            addBtnMenuContactEvent();
+            addBtnMenuAboutEvent();
             //add brand name to slide menu
             getBrandData();
             //add style name to slide menu
@@ -123,6 +126,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void addBtnMenuAboutEvent() {
+
+    }
+
+    private void addBtnMenuContactEvent() {
+        btnMenuContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ContactActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void addBtnMenuRegisterEvent() {
+        btnMenuRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void addBtnMenuLogOutEvent() {
         btnMenuLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +158,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void addBtnMenuLoginEvent() {
         btnMenuLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,14 +201,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         dlHome.closeDrawer(GravityCompat.START);
                         break;
-//                        if (Connection.checkNetworkConnection(getApplicationContext())) {
-//                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                        } else {
-//                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
-//                        }
-//                        dlHome.closeDrawer(GravityCompat.START);
-//                        break;
                     case 1:
                         if (Connection.checkNetworkConnection(getApplicationContext())) {
                             Intent intent = new Intent(MainActivity.this, StyleActivity.class);
@@ -241,14 +261,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                         dlHome.closeDrawer(GravityCompat.START);
                         break;
-//                        if (Connection.checkNetworkConnection(getApplicationContext())) {
-//                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
-//                            startActivity(intent);
-//                        } else {
-//                            Toast.makeText(MainActivity.this, "Please! Check your connection", Toast.LENGTH_SHORT).show();
-//                        }
-//                        dlHome.closeDrawer(GravityCompat.START);
-//                        break;
                     case 1:
                         if (Connection.checkNetworkConnection(getApplicationContext())) {
                             Intent intent = new Intent(MainActivity.this, BrandActivity.class);
@@ -317,7 +329,7 @@ public class MainActivity extends AppCompatActivity {
                                 productImage1 = MenwatchServer.linkImage + jsonObjectImage.getString("img1");
                                 productImage2 = MenwatchServer.linkImage + jsonObjectImage.getString("img2");
                                 productImage3 = MenwatchServer.linkImage + jsonObjectImage.getString("img3");
-//get image jsonb
+                                //get image jsonb
                                 JSONObject jsonObjectDetails = jsonObject.getJSONObject("details");
                                 productCS = jsonObjectDetails.getString("cs");
                                 productMT = jsonObjectDetails.getString("mt");
@@ -438,12 +450,14 @@ public class MainActivity extends AppCompatActivity {
         cSession = new CustomerSession(getApplicationContext());
         btnMenuLogout = findViewById(R.id.btnMenuLogout);
         btnMenuLogin = findViewById(R.id.btnMenuLogin);
+        btnMenuAbout = findViewById(R.id.btnMenuAbout);
+        btnMenuContact = findViewById(R.id.btnMenuContact);
         btnMenuRegister = findViewById(R.id.btnMenuRegister);
-        if(!cSession.isCustomerLoggedIn()){
+        if (!cSession.isCustomerLoggedIn()) {
             btnMenuRegister.setVisibility(View.VISIBLE);
             btnMenuLogout.setVisibility(View.INVISIBLE);
             btnMenuLogin.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             btnMenuRegister.setVisibility(View.INVISIBLE);
             btnMenuLogin.setVisibility(View.INVISIBLE);
             btnMenuLogout.setVisibility(View.VISIBLE);

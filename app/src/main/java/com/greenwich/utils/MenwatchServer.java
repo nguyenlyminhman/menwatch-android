@@ -17,4 +17,5 @@ public class MenwatchServer {
     public static String linkProductByStyle = host + "/api/product/style/";
     public static String linkLogin = host + "/api/customer/login";
     public static String linkCheckout = host + "/api/customer/checkout";
+    public static String linkRegister = host + "/api/customer/register";
 }
