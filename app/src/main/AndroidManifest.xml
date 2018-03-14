@@ -27,7 +27,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".CheckOutActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".ContactActivity"></activity>
+        <activity android:name=".ContactActivity" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>
