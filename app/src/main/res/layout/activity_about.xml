@@ -13,14 +13,14 @@
         android:layout_height="?attr/actionBarSize"
         android:background="#73B6E1"
         app:title="About"
-        app:titleTextColor="#f0f0f0">
-    </android.support.v7.widget.Toolbar>
+        app:titleTextColor="#f0f0f0"></android.support.v7.widget.Toolbar>
 
     <LinearLayout
-        android:background="#999"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#999"
         android:gravity="center">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,6 +28,7 @@
             android:layout_marginRight="25dp"
             android:background="@drawable/login_border"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -36,55 +37,64 @@
                 android:textColor="#73B6E1"
                 android:textSize="25dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Menwatches company,"
-                android:textColor="#000"
-                android:textSize="18dp"
-                 />
+                android:text="The Men Watches Store,"
+                android:textColor="#999"
+                android:textSize="18dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="123 Abc street,"
-                android:textColor="#000"
-                android:textSize="18dp"
-                 />
+                android:text="00 Nelson Rd,"
+                android:textColor="#999"
+                android:textSize="18dp" />
+
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Greenwich, London SE10 9JB, UK."
+                android:textColor="#999"
+                android:textSize="18dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="25dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:text="Contact"
                 android:textColor="#73B6E1"
                 android:textSize="25dp"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Tel:1115550001,"
-                android:textColor="#000"
-                android:textSize="18dp"
-                />
+                android:text="Tel: +44 20 1234 5678,"
+                android:textColor="#999"
+                android:textSize="18dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Fax:190-4509-494,"
-                android:textColor="#000"
-                android:textSize="18dp"
-                />
+                android:text="Fax:190-8589-4969"
+                android:textColor="#999"
+                android:textSize="18dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Email: menwatch@gmail.com"
-                android:textColor="#000"
-                android:textSize="18dp"
-                />
+                android:text="Email: email@menwatch.com"
+                android:textColor="#999"
+                android:textSize="18dp" />
 
         </LinearLayout>
     </LinearLayout>
