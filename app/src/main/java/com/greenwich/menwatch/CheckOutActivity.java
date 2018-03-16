@@ -85,7 +85,7 @@ public class CheckOutActivity extends AppCompatActivity {
                 } else if (CardName.isEmpty()) {
                     Toast.makeText(CheckOutActivity.this, "Enter the card holder name.", Toast.LENGTH_SHORT).show();
                     return;
-                }else if(card==null){
+                } else if (card == null) {
                     Toast.makeText(CheckOutActivity.this, "Card is not valid.", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -103,6 +103,10 @@ public class CheckOutActivity extends AppCompatActivity {
                                             JSONObject jsonObject = null;
                                             try {
                                                 jsonObject = new JSONObject(response);
+                                                if (jsonObject.getString("status").equals("fail")) {
+                                                    Toast.makeText(CheckOutActivity.this, jsonObject.getString("data"), Toast.LENGTH_LONG).show();
+                                                    return;
+                                                }
                                                 if (Integer.parseInt(jsonObject.getString("data")) > 0) {
                                                     MainActivity.arrCart.clear();
                                                     Intent intent = new Intent(getApplicationContext(), CartActivity.class);
@@ -154,6 +158,7 @@ public class CheckOutActivity extends AppCompatActivity {
                         };
                         requestQueue.add(postRequest);
                     }
+
                     public void onError(Exception error) {
                         Log.d("Stripe", error.getLocalizedMessage());
                     }
