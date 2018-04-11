@@ -108,8 +108,7 @@ public class CheckOutActivity extends AppCompatActivity {
                                                     return;
                                                 }
                                                 if (Integer.parseInt(jsonObject.getString("data")) > 0) {
-                                                    MainActivity.arrCart.clear();
-                                                    Intent intent = new Intent(getApplicationContext(), CartActivity.class);
+                                                    MainActivity.arrCart.clear();Intent intent = new Intent(getApplicationContext(), CartActivity.class);
                                                     startActivity(intent);
                                                 }
 
@@ -136,6 +135,7 @@ public class CheckOutActivity extends AppCompatActivity {
                                     try {
                                         jsonObject.put("ProductId", MainActivity.arrCart.get(i).getProductId());
                                         jsonObject.put("ProductQty", MainActivity.arrCart.get(i).getProductQuantity());
+                                        jsonObject.put("ProductPrice", MainActivity.arrCart.get(i).getProductPrice());
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }

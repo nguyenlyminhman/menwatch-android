@@ -114,9 +114,6 @@ public class CartAdapter extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
-
-
-
         return view;
     }
 }
