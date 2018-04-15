@@ -158,7 +158,6 @@ public class CheckOutActivity extends AppCompatActivity {
                         };
                         requestQueue.add(postRequest);
                     }
-
                     public void onError(Exception error) {
                         Log.d("Stripe", error.getLocalizedMessage());
                     }
